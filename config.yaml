@@ -49,8 +49,8 @@ model:
 training:
   image_size: 320                # 输入图像大小
   batch_size: 16
-  num_workers: 4
-  epochs: 20
+  num_workers: 0
+  epochs: 50
   learning_rate: 1.0e-3
   weight_decay: 1.0e-4
   scheduler: "cosine"            # cosine / step / none
