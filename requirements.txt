@@ -1,0 +1,12 @@
+torch>=2.0
+torchvision>=0.15
+timm>=0.9
+pandas>=1.5
+numpy>=1.24
+scikit-learn>=1.2
+matplotlib>=3.7
+Pillow>=9.0
+tqdm>=4.65
+pyyaml>=6.0
+pytorch-grad-cam>=1.5
+opencv-python>=4.7

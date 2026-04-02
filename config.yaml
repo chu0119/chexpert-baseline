@@ -1,0 +1,64 @@
+# CheXpert Baseline 配置文件
+
+# 数据路径（根据你的实际路径修改）
+data:
+  csv_dir: "E:/yibao/archive"          # train.csv 和 valid.csv 所在目录
+  image_dir: "E:/yibao/archive"        # train/ 和 valid/ 图片目录
+  train_csv: "train.csv"
+  valid_csv: "valid.csv"
+
+# CheXpert 14个竞争赛道标签
+# 0=阴性, 1=阳性, -1=不确定
+labels:
+  - "No Finding"
+  - "Enlarged Cardiomediastinum"
+  - "Cardiomegaly"
+  - "Lung Opacity"
+  - "Lung Lesion"
+  - "Edema"
+  - "Consolidation"
+  - "Pneumonia"
+  - "Atelectasis"
+  - "Pneumothorax"
+  - "Pleural Effusion"
+  - "Pleural Other"
+  - "Fracture"
+  - "Support Devices"
+
+# 训练时使用的标签子集（去掉不太重要的）
+train_labels:
+  - "Atelectasis"
+  - "Cardiomegaly"
+  - "Consolidation"
+  - "Edema"
+  - "Pleural Effusion"
+  - "Pneumonia"
+  - "Pneumothorax"
+
+# 不确定值的处理方式: "ignore"(当作0) 或 "ones"(当作1)
+uncertain_handling: "ignore"
+
+# 模型配置
+model:
+  name: "tf_efficientnetv2_s"   # timm模型名
+  pretrained: true
+  num_classes: 7                 # train_labels的数量
+  dropout: 0.3
+
+# 训练配置
+training:
+  image_size: 320                # 输入图像大小
+  batch_size: 16
+  num_workers: 4
+  epochs: 20
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-4
+  scheduler: "cosine"            # cosine / step / none
+  warmup_epochs: 2
+  mixup_alpha: 0.2               # 0 = 关闭mixup
+  label_smoothing: 0.1
+
+# 保存路径
+output:
+  save_dir: "outputs"
+  model_name: "efficientnetv2_chexpert"
