@@ -236,3 +236,9 @@ class Trainer:
         
         print(f"训练完成! 最佳 AUROC: {self.best_auroc:.4f}")
         print(f"最佳模型保存在: {self.cfg.output.save_dir}/{self.cfg.output.model_name}_best.pth")
+
+
+if __name__ == "__main__":
+    cfg = Config.from_yaml("config.yaml")
+    trainer = Trainer(cfg)
+    trainer.train()
