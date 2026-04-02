@@ -40,7 +40,7 @@ uncertain_handling: "ignore"
 
 # 模型配置
 model:
-  name: "tf_efficientnetv2_s"   # timm模型名
+  name: "convnext_base"   # timm模型名
   pretrained: true
   num_classes: 7                 # train_labels的数量
   dropout: 0.3
