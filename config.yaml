@@ -1,9 +1,9 @@
 # CheXpert Baseline 配置文件
 
-# 数据路径（根据你的实际路径修改）
+# 数据路径（WSL2 Ubuntu 环境）
 data:
-  csv_dir: "E:/yibao/archive"          # train.csv 和 valid.csv 所在目录
-  image_dir: "E:/yibao/archive"        # train/ 和 valid/ 图片目录
+  csv_dir: "/mnt/host/e/yibao/archive"
+  image_dir: "/mnt/host/e/yibao/archive"
   train_csv: "train.csv"
   valid_csv: "valid.csv"
 
@@ -25,7 +25,7 @@ labels:
   - "Fracture"
   - "Support Devices"
 
-# 训练时使用的标签子集（去掉不太重要的）
+# 训练时使用的标签子集
 train_labels:
   - "Atelectasis"
   - "Cardiomegaly"
@@ -40,25 +40,25 @@ uncertain_handling: "ignore"
 
 # 模型配置
 model:
-  name: "convnext_base"   # timm模型名
+  name: "convnext_base"
   pretrained: true
-  num_classes: 7                 # train_labels的数量
+  num_classes: 7
   dropout: 0.3
 
-# 训练配置
+# 训练配置（WSL2 Linux 环境，支持多进程）
 training:
-  image_size: 320                # 输入图像大小
-  batch_size: 16
-  num_workers: 0
+  image_size: 320
+  batch_size: 32
+  num_workers: 4
   epochs: 50
   learning_rate: 1.0e-3
   weight_decay: 1.0e-4
-  scheduler: "cosine"            # cosine / step / none
+  scheduler: "cosine"
   warmup_epochs: 2
-  mixup_alpha: 0.2               # 0 = 关闭mixup
+  mixup_alpha: 0.2
   label_smoothing: 0.1
 
 # 保存路径
 output:
-  save_dir: "outputs"
-  model_name: "efficientnetv2_chexpert"
+  save_dir: "/mnt/host/e/yibao/chexpert-baseline/outputs"
+  model_name: "convnext_chexpert"
